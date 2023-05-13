@@ -1,0 +1,16 @@
+body {
+    animation: fadeout 3s ease-in 1 forwards;
+    
+}
+
+@keyframes fadeout {
+    0% {opacity: 1;
+        background-color: white;}
+    
+    33% {
+        opacity: 0.5;
+        background-color: gray;}
+
+    100% {opacity: 0;
+        background-color: white;}
+}
