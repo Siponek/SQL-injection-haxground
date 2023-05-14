@@ -18,9 +18,11 @@ This will start two Docker containers: one for the web application (built from t
 
 ## Usage
 
-Once the application is running, you can access it at `http://localhost` in your web browser. The application provides a login form, which you can attempt to bypass using SQL injection techniques.
+Once the application is running, you can access it at `http://localhost:8000` in your web browser. The application provides a login form, which you can attempt to bypass using SQL injection techniques.
 
-The application includes two versions of the login page: one vulnerable to SQL injection, and one that sanitizes user input to prevent injection. You can switch between these by accessing different URLs.
+If you wish to tinker with SQL-injection-haxground, you can edit the files in the `init` directory, which will be copied into the web application container when it is built. You can then rebuild the container using `docker-compose build`. Or visit `http://localhost:8080` to access the database.
+
+The application includes three versions of the login page: one vulnerable to SQL injection, and one that sanitizes user input to prevent injection. All are accessible from the main index page.
 
 ### Vulnerable Login
 
