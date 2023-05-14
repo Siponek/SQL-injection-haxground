@@ -1,6 +1,93 @@
 <!DOCTYPE html>
-<form method="POST" action="login.php">
-	<input type="text" name="user" placeholder="Username" required><br>
-	<input type="password" name="pass" placeholder="Password" required><br>
-	<input type="submit" value="Login">
-</form>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+			  rel="stylesheet">
+
+		<title>SQL Login</title>
+	</head>
+
+	<body>
+		<h1>SQL Login page</h1>
+		<div class="flex">
+			<div class="tips">
+				<div>
+					<h2>Normal login</h2>
+					<form method="POST" action="./php/login.php">
+						<input type="text" name="user" placeholder="Username"
+							   required><br>
+						<input type="password" name="pass"
+							   placeholder="Password" required><br>
+						<input type="submit" value="Login">
+					</form>
+				</div>
+			</div>
+			<div class="tips">
+				<p>The query will look for an user that matches the username
+					and
+					password</p>
+				<p>Try that combination to log in as the first user in db!
+				</p>
+				<p>username: Arthur’ -- -</p>
+				<p>password: anything</p>
+			</div>
+		</div>
+		<div class="flex">
+			<div class="tips">
+				<h2>SQL union login</h2>
+				<form method="GET" action="./php/union_login.php">
+					<input type="text" name="payload" placeholder="Username"
+						   required><br>
+					<input type="submit" value="Login">
+				</form>
+			</div>
+			<div class="tips">
+				<h6>The query will look for an user that matches the username
+				</h6>
+				<p>Try Arthur' OR 'a'='a' to get all of the results!</p>
+				<h6>Or call a different db or table!</h6>
+				<p>Arthur' UNION ALL SELECT user AS username, null AS id,
+					authentication_string AS password_auth,NULL FROM mysql.user
+					-- -</p>
+
+			</div>
+		</div>
+
+	</body>
+	<style>
+		html {
+			font-family: 'Montserrat', sans-serif;
+		}
+
+		h1 div {
+			display: block;
+			width: 40%;
+			margin: 10px;
+			padding: 10px;
+			border: 1px solid black;
+		}
+
+		.flex {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+		}
+
+		.tips {
+			display: inline-block;
+			width: 40%;
+			margin: 10px;
+			padding: 10px;
+			border: 1px solid black;
+			border-radius: 5px;
+
+		}
+	</style>
+
+</html>

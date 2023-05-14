@@ -1,15 +1,6 @@
 <?php
 
-function redirectToLogin(string $var): void
-{
-    echo $var;
-    echo '
-    <link rel="stylesheet" type="text/css" href="./css/dimming.css">
-    <script src="./js/redirect.js"></script>
-    ';
-
-    // Return and clean output buffer
-}
+require_once 'libs/redirectFunctions.php';
 
 
 
@@ -45,9 +36,9 @@ $pass = $_POST['pass'];
 
 
 try {
-// execute query
-$results = $conn->query("SELECT * FROM users WHERE username = '$user' AND password = '$pass'");
-// a' OR 'b'='b
+    // execute query
+    $results = $conn->query("SELECT * FROM users WHERE username = '$user' AND password = '$pass'");
+    // a' OR 'b'='b
 // check if any rows were returned
 // FIXME number of rows should be 1, not more
     // if ($results === false) {
