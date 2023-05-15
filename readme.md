@@ -14,7 +14,7 @@ cd SQL-injection-haxground
 docker-compose up
 ```
 
-This will start two Docker containers: one for the web application (built from the `Dockerfile` in the `docker` directory), and one for the MySQL database (configured in `docker-compose.yaml`).
+This will start three Docker containers: one for the web application (built from the `Dockerfile` in the `docker` directory), one for the MySQL database (configured in `docker-compose.yaml`) and one for Adminer as database web manager.
 
 ## Usage
 
